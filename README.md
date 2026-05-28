@@ -1,57 +1,101 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 公众号数据分析平台
 
-Currently, two official plugins are available:
+一个帮助内容创作者分析公众号运营数据、发现创作规律、提供内容建议的单页应用。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 功能特性
 
-## Expanding the ESLint configuration
+- **数据概览**：查看关键指标卡片和趋势图表
+- **文章分析**：文章数据列表，支持搜索和排序
+- **内容建议**：基于数据分析的创作方向推荐
+- **微信公众号API集成**：支持连接真实公众号，同步运营数据
+- **本地数据存储**：数据存储在浏览器本地，安全可靠
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 技术栈
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- 前端框架：React 18 + TypeScript
+- 构建工具：Vite
+- 状态管理：Zustand
+- 路由：React Router DOM
+- 图表库：Recharts
+- UI样式：Tailwind CSS
+- 图标库：Lucide React
+
+## 快速开始
+
+### 安装依赖
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 启动开发服务器
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  extends: [
-    // other configs...
-    // Enable lint rules for React
-    reactX.configs['recommended-typescript'],
-    // Enable lint rules for React DOM
-    reactDom.configs.recommended,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm run dev
 ```
+
+### 构建生产版本
+
+```bash
+npm run build
+```
+
+## 项目结构
+
+```
+/workspace
+├── src/
+│   ├── components/        # 可复用组件
+│   ├── pages/            # 页面组件
+│   ├── hooks/            # 自定义hooks
+│   ├── store/            # Zustand状态管理
+│   ├── services/         # API服务
+│   ├── utils/            # 工具函数和模拟数据
+│   ├── App.tsx
+│   └── main.tsx
+├── .trae/
+│   └── documents/        # 项目文档
+├── package.json
+├── vite.config.ts
+└── tailwind.config.js
+```
+
+## 微信公众号API集成
+
+### 功能说明
+
+应用支持与微信公众号开放平台API集成，实现以下功能：
+
+1. **OAuth认证**：用户授权连接公众号
+2. **数据同步**：从微信服务器获取文章和统计数据
+3. **本地存储**：将同步的数据保存在浏览器本地
+4. **实时分析**：基于真实数据进行分析和建议
+
+### 使用步骤
+
+1. 进入「设置」页面
+2. 点击「连接公众号」按钮
+3. 完成微信OAuth授权流程（当前为模拟演示）
+4. 授权成功后，点击「立即同步」获取数据
+5. 数据同步完成后，即可在各个页面查看分析结果
+
+### 生产环境配置
+
+要在生产环境中实现真实的微信公众号API集成，需要：
+
+1. 在微信开放平台注册应用，获取 AppID 和 AppSecret
+2. 配置后端服务处理 OAuth 流程和 API 调用
+3. 更新 `src/services/wechatApi.ts` 中的配置信息
+
+## 开发说明
+
+当前版本包含模拟数据和模拟API调用，用于演示功能。在生产环境中，需要：
+
+- 替换模拟数据为真实的API调用
+- 实现后端服务处理微信OAuth流程
+- 配置适当的错误处理和用户反馈
+
+## License
+
+MIT

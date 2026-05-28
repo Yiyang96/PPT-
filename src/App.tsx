@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { BarChart3, FileText, Lightbulb, Home } from 'lucide-react';
+import { BarChart3, FileText, Lightbulb, Home, Settings as SettingsIcon } from 'lucide-react';
 import { Dashboard } from './pages/Dashboard';
 import { Articles } from './pages/Articles';
 import { Suggestions } from './pages/Suggestions';
+import { Settings } from './pages/Settings';
 
 const NavLink = ({ to, icon: Icon, label }: { to: string; icon: any; label: string }) => {
   const location = useLocation();
@@ -41,6 +42,7 @@ function AppContent() {
               <NavLink to="/" icon={Home} label="数据概览" />
               <NavLink to="/articles" icon={FileText} label="文章分析" />
               <NavLink to="/suggestions" icon={Lightbulb} label="内容建议" />
+              <NavLink to="/settings" icon={SettingsIcon} label="设置" />
             </div>
           </div>
         </div>
@@ -50,6 +52,7 @@ function AppContent() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/suggestions" element={<Suggestions />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </div>
   );

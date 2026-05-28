@@ -7,6 +7,19 @@ import {
   suggestions,
   getDashboardStats,
 } from '../utils/mockData';
+import { getLocalData, isConnected } from '../services/wechatApi';
+
+const getInitialArticles = (): Article[] => {
+  if (isConnected()) {
+    const localData = getLocalData();
+    if (localData && localData.length > 0) {
+      return localData;
+    }
+  }
+  return mockArticles;
+};
+
+const initialArticles = getInitialArticles();
 
 interface AppState {
   articles: Article[];
@@ -16,11 +29,13 @@ interface AppState {
   sortBy: 'date' | 'views' | 'likes';
   setSearchTerm: (term: string) => void;
   setSortBy: (sortBy: 'date' | 'views' | 'likes') => void;
+  setArticles: (articles: Article[]) => void;
+  setDashboardStats: (stats: DashboardStats) => void;
   getFilteredArticles: () => Article[];
 }
 
 export const useStore = create<AppState>((set, get) => ({
-  articles: mockArticles,
+  articles: initialArticles,
   dashboardStats: getDashboardStats(),
   suggestions: suggestions,
   searchTerm: '',
@@ -29,6 +44,10 @@ export const useStore = create<AppState>((set, get) => ({
   setSearchTerm: (term) => set({ searchTerm: term }),
 
   setSortBy: (sortBy) => set({ sortBy }),
+
+  setArticles: (articles) => set({ articles, dashboardStats: getDashboardStats() }),
+
+  setDashboardStats: (stats) => set({ dashboardStats: stats }),
 
   getFilteredArticles: () => {
     const { articles, searchTerm, sortBy } = get();
